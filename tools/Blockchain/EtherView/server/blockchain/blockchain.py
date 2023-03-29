@@ -273,9 +273,10 @@ def get_accounts():
 @blockchain.route('/get_web3_providers')
 def get_web3_providers():
     providers = []
-    for key in app.eth_nodes: 
-        node = app.eth_nodes[key]
-        providers.append("http://%s:8545" % node['ip']) 
+    providers.append("http://34.30.98.18:8000" % node['ip'])
+    # for key in app.eth_nodes: 
+    #     node = app.eth_nodes[key]
+    #     providers.append("http://%s:8545" % node['ip']) 
 
     return providers
 

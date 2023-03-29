@@ -6,7 +6,7 @@ from seedemu import *
 # Create Emulator Base with 10 Stub AS (150-154, 160-164) using Makers utility method.
 # hosts_per_stub_as=3 : create 3 hosts per one stub AS.
 # It will create hosts(physical node) named `host_{}`.format(counter), counter starts from 0. 
-hosts_per_stub_as = 3
+hosts_per_stub_as = 5
 emu = Makers.makeEmulatorBaseWith10StubASAndHosts(hosts_per_stub_as = hosts_per_stub_as)
 
 # Create the Ethereum layer
@@ -62,8 +62,9 @@ for asn in asns:
         # Before the Merge, when the consensus in this blockchain is still POA, 
         # these hosts will be the signer nodes.
         if asn in [152,153,154,160,161,162,163,164]:
-            e.enablePOSValidatorAtGenesis()
-            e.startMiner()
+            if id in [0,1,2]:
+                e.enablePOSValidatorAtGenesis()
+                e.startMiner()
 
         # Customizing the display names (for visualiztion purpose)
         if e.isBeaconSetupNode():
@@ -71,6 +72,12 @@ for asn in asns:
         else:
             emu.getVirtualNode('eth{}'.format(i)).setDisplayName('Ethereum-POS-{}'.format(i))
 
+        if asn == 160 and id == 3:
+            e.enablePOSValidatorAtRunning(is_manual=True)
+            emu.getVirtualNode('eth{}'.format(i)).addPortForwarding(8545, 8545)
+            emu.getVirtualNode('eth{}'.format(i)).addPortForwarding(8000, 8000)
+            emu.getVirtualNode('eth{}'.format(i)).addPortForwarding(5062, 5062)
+             
         # Binding the virtual node to the physical node. 
         emu.addBinding(Binding('eth{}'.format(i), filter=Filter(asn=asn, nodeName='host_{}'.format(id))))
 

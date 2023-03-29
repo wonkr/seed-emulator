@@ -60,7 +60,7 @@ function set_provider_selector() {
   let provider_selector = document.getElementById("provider-selector");
   let options = ``;
   providers.forEach(function (p, index) {
-    if (index == 5) {
+    if (index == 0) {
       provider_url = p;
       options = `<option selected>Provider: ${p}</option>`;
     }

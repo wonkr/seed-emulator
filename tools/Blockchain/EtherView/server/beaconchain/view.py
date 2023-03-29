@@ -16,12 +16,13 @@ def getSlotDetails(slotNumber):
 
 
 
-
 @beaconchain.route('/get_beacon_providers')
 def get_beacon_providers():
     providers = []
-    for key in app.eth_nodes: 
-        node = app.eth_nodes[key]
-        providers.append("http://%s:8000" % node['ip'])
+    providers.append("http://34.30.98.18:8000" % node['ip'])
+
+    # for key in app.eth_nodes: 
+    #     node = app.eth_nodes[key]
+    #     providers.append("http://%s:8000" % node['ip'])
 
     return providers

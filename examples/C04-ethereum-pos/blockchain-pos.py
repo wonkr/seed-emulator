@@ -89,6 +89,6 @@ emu.render()
 
 # Enable internetMap
 # Enable etherView
-docker = Docker(internetMapEnabled=True, etherViewEnabled=True)
+docker = Docker(internetMapEnabled=True)
 
 emu.compile(docker, './output', override = True)
